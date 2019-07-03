@@ -43,6 +43,8 @@ def action_wrapper(hermes, intent_message, conf):
 	
     current_session_id = intent_message.session_id
     hermes.publish_end_session(current_session_id, result_sentence)
+    
+    print("Hallo, ich bin der Test!")
 
 
 if __name__ == "__main__":
