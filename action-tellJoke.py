@@ -35,7 +35,7 @@ def action_wrapper(hermes, intent_message, conf):
     """
 
     file = open(os.path.dirname(os.path.realpath(__file__)) + "/witze.txt")
-    result_sentence = random_line(file)
+    result_sentence = "Hallo, das ist ein Witz!"
     file.close()
 
     current_session_id = intent_message.session_id
