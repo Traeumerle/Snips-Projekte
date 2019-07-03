@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import xml.etree.cElementTree as ET
+
 from hermes_python.hermes import Hermes
 from hermes_python.ontology import *
 import random
@@ -33,10 +35,20 @@ def action_wrapper(hermes, intent_message, conf):
 
     Refer to the documentation for further details. 
     """
+    
 
     file = open(os.path.dirname(os.path.realpath(__file__)) + "/witze.txt")
     result_sentence = "Hallo, ich bin ein String und wurde hier her geschrieben."
     file.close()
+
+
+	object = ET.Element("object")
+	probe = ET.SubElement(object, "doc")
+	
+	ET.SubElement(probe, "param1", name="stoff").text = result_sentence
+	
+	tree = ET.ElementTree(root)
+	tree.write("test_xml.xml")
 
     current_session_id = intent_message.session_id
     hermes.publish_end_session(current_session_id, result_sentence)
