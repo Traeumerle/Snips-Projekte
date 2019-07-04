@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import xml.etree.cElementTree as ET
+from lxml import etree
 
 from hermes_python.hermes import Hermes
 from hermes_python.ontology import *
@@ -39,13 +39,13 @@ def action_wrapper(hermes, intent_message, conf):
     result_sentence = "Hallo, ich bin ein String und wurde hier her geschrieben."
     file.close()    
     
-    root = ET.Element("root")
-    doc = ET.SubElement(root, "doc")
+    root = etree.Element("root")
+    doc = etree.SubElement(root, "doc")
 
-    ET.SubElement(doc, "field1", name="blah").text = "some value1"
-    ET.SubElement(doc, "field2", name="asdfasd").text = "some vlaue2"
+    etree.SubElement(doc, "field1", name="blah").text = "some value1"
+    etree.SubElement(doc, "field2", name="asdfasd").text = "some vlaue2"
 
-    tree = ET.ElementTree(root)
+    tree = etree.ElementTree(root)
     tree.write("filename.xml")
 
 	
