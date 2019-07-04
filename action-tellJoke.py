@@ -46,7 +46,7 @@ def action_wrapper(hermes, intent_message, conf):
     etree.SubElement(doc, "field2", name="asdfasd").text = result_sentence
 
     tree = etree.ElementTree(root)
-    tree.write(r"/var/lib/snips/Python_Webserver/filename.xml")
+    tree.write("filename.xml")
 	
     current_session_id = intent_message.session_id
     hermes.publish_end_session(current_session_id, result_sentence)
