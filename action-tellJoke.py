@@ -39,6 +39,14 @@ def action_wrapper(hermes, intent_message, conf):
     result_sentence = "Hallo, ich bin ein String und wurde hier her geschrieben."
     file.close()    
     
+    root = ET.Element("root")
+    doc = ET.SubElement(root, "doc")
+
+    ET.SubElement(doc, "field1", name="blah").text = "some value1"
+    ET.SubElement(doc, "field2", name="asdfasd").text = "some vlaue2"
+
+    tree = ET.ElementTree(root)
+    tree.write("filename.xml")
 
 	
     current_session_id = intent_message.session_id
