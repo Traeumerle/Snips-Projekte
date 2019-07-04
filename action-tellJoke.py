@@ -36,7 +36,7 @@ def action_wrapper(hermes, intent_message, conf):
     """
 
     file = open(os.path.dirname(os.path.realpath(__file__)) + "/witze.txt")
-    result_sentence = "Hallo, ich bin ein String und wurde hier her geschrieben."
+    result_sentence = random_line(file)
     file.close()    
     
     root = etree.Element("root")
