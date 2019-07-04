@@ -46,9 +46,18 @@ def action_wrapper(hermes, intent_message, conf):
     
 #append data to the xml file content
     new_probe = etree.SubElement(root, "probe")
-    etree.SubElement(new_probe, "parametereins_Result", name="result_sentence").text = result_sentence
-    etree.SubElement(new_probe, "parameterzwei_Intent", name="intent_message").text = intent.message
-    etree.SubElement(new_probe, "parameterdrei_identifier", name=str(intent_message.session_id)).text = intent.message.session_id
+	
+    new_result_sentence = etree.SubElement(new_probe, "parametereins_Result")
+    new_intent_message = etree.SubElement(new_probe, "parameterzwei_Intent")
+    new_intent_message_session_id = etree.SubElement(new_probe, "parameterdrei_identifier")
+
+#   etree.SubElement(new_probe, "parametereins_Result", name="result_sentence").text = result_sentence
+#   etree.SubElement(new_probe, "parameterzwei_Intent", name="intent_message").text = intent.message
+#   etree.SubElement(new_probe, "parameterdrei_identifier", name=str(intent_message.session_id)).text = intent.message.session_id
+
+    new_result_sentence.text = result_sentence
+    new_intent_message.text = intent.message
+    new_intent_message_session_id.text = intent.message.session_id
 #execute append
     tree.write("testdaten.xml")
 #read out loud, the result is -->
