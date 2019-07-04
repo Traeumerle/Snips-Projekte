@@ -35,6 +35,16 @@ def action_wrapper(hermes, intent_message, conf):
     Refer to the documentation for further details. 
     """
 
+#get the base data and read it
+    base_path = os.path.dirname(os.path.realpath(__file__))
+    xml file = os.path.join(base_path, "/Testdaten.xml")
+    tree = etree.parse("Testdaten.xml")
+    root = tree.getroot()
+    
+#append data to the xml file
+
+    
+    
     file = open(os.path.dirname(os.path.realpath(__file__)) + "/witze.txt")
     result_sentence = random_line(file)
     file.close()    
