@@ -42,18 +42,15 @@ def action_wrapper(hermes, intent_message, conf):
     root = etree.Element("root")
     doc = etree.SubElement(root, "doc")
 
-    etree.SubElement(doc, "field1", name="blah").text = "some value1"
-    etree.SubElement(doc, "field2", name="asdfasd").text = "some vlaue2"
+    etree.SubElement(doc, "field1", name="blah").text = result_sentence
+    etree.SubElement(doc, "field2", name="asdfasd").text = result_sentence
 
     tree = etree.ElementTree(root)
-    tree.write("filename.xml")
-
+    tree.write(r"/var/lib/snips/Python_Webserver/filename.xml")
 	
     current_session_id = intent_message.session_id
     hermes.publish_end_session(current_session_id, result_sentence)
-    
-    print("Hallo, ich bin der Test!")
-
+	
 
 if __name__ == "__main__":
     with Hermes("localhost:1883") as h:
