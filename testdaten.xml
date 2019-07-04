@@ -1,0 +1,13 @@
+<unternehmen>
+<probe name="irgendwas">
+<parametereins>
+Parameter 1
+</parametereins>
+<parameterzwei>
+Parameter2
+</parameterzwei>
+<parameterdrei>
+Parameter3
+</parameterdrei>
+</probe>
+</unternehmen>
