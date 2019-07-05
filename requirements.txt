@@ -1,3 +1,4 @@
-# Bindings for the hermes protocol 
 hermes-python>=0.1
 lxml
+snipskit[mqtt]==0.5.3
+
