@@ -54,5 +54,5 @@ def action_wrapper(hermes, intent_message, conf):
 
 if __name__ == "__main__":
     with Hermes("localhost:1883") as h:
-        h.subscribe_intent("DANBER:tellJoke", subscribe_intent_callback) \
+        h.subscribe_intent("ttr:witzBitte", subscribe_intent_callback) \
             .start()
