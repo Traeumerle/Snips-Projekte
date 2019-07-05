@@ -31,36 +31,22 @@ def action_wrapper(hermes, intent_message, conf):
     - conf : a dictionary that holds the skills parameters you defined. 
       To access global parameters use conf['global']['parameterName']. 
       For end-user parameters use conf['secret']['parameterName'] 
-
     Refer to the documentation for further details. 
     """
+
     file = open(os.path.dirname(os.path.realpath(__file__)) + "/witze.txt")
     result_sentence = random_line(file)
-    file.close() 
-
-#get the base data and read it
-    base_path = os.path.dirname(os.path.realpath(__file__))
-    xml file = os.path.join(base_path, "/testdaten.xml")
-    tree = etree.parse("testdaten.xml")
-    root = tree.getroot()
+    file.close()    
     
-#append data to the xml file content
-    new_probe = etree.SubElement(root, "probe")
+    root = etree.Element("root")
+    doc = etree.SubElement(root, "doc")
+
+    etree.SubElement(doc, "field1", name="blah").text = result_sentence
+    etree.SubElement(doc, "field2", name="asdfasd").text = result_sentence
+
+    tree = etree.ElementTree(root)
+    tree.write("Testdaten.xml")
 	
-    new_result_sentence = etree.SubElement(new_probe, "parametereins_Result")
-    new_intent_message = etree.SubElement(new_probe, "parameterzwei_Intent")
-    new_intent_message_session_id = etree.SubElement(new_probe, "parameterdrei_identifier")
-
-#   etree.SubElement(new_probe, "parametereins_Result", name="result_sentence").text = result_sentence
-#   etree.SubElement(new_probe, "parameterzwei_Intent", name="intent_message").text = intent.message
-#   etree.SubElement(new_probe, "parameterdrei_identifier", name=str(intent_message.session_id)).text = intent.message.session_id
-
-    new_result_sentence.text = result_sentence
-    new_intent_message.text = intent.message
-    new_intent_message_session_id.text = intent.message.session_id
-#execute append
-    tree.write("testdaten.xml")
-#read out loud, the result is -->
     current_session_id = intent_message.session_id
     hermes.publish_end_session(current_session_id, result_sentence)
 	
