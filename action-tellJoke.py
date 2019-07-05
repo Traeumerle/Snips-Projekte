@@ -38,13 +38,14 @@ def action_wrapper(hermes, intent_message, conf):
     result_sentence = random_line(file)
     file.close()    
     
-    root = etree.Element("root")
-    doc = etree.SubElement(root, "doc")
+    unternehmen = etree.Element("unternehmen")
+    probe = etree.SubElement(unternehmen, "probe")
 
-    etree.SubElement(doc, "field1", name="blah").text = result_sentence
-    etree.SubElement(doc, "field2", name="asdfasd").text = result_sentence
-
-    tree = etree.ElementTree(root)
+    etree.SubElement(probe, "parametereins").text = result_sentence
+    etree.SubElement(probe, "parameterzwei").text = result_sentence
+    etree.SubElement(probe, "parameterdrei").text = result_sentence
+	
+    tree = etree.ElementTree(unternehmen)
     tree.write("Testdaten.xml")
 	
     current_session_id = intent_message.session_id
