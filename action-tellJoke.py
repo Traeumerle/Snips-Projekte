@@ -42,8 +42,8 @@ def action_wrapper(hermes, intent_message, conf):
     probe = etree.SubElement(unternehmen, "probe")
 
     etree.SubElement(probe, "parametereins").text = result_sentence
-    etree.SubElement(probe, "parameterzwei").text = result_sentence
-    etree.SubElement(probe, "parameterdrei").text = result_sentence
+    etree.SubElement(probe, "parameterzwei").text = intent_message
+    etree.SubElement(probe, "parameterdrei").text = intent_message.session_id
 	
     tree = etree.ElementTree(unternehmen)
     tree.write("testdaten.xml")
