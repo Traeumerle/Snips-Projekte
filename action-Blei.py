@@ -23,7 +23,7 @@ def action_wrapper(hermes, intent_message):
     unternehmen = etree.Element("unternehmen")
     probe = etree.SubElement(unternehmen, "probe")
 
-    etree.SubElement(probe, "parametereins").text = str(intent_message)
+    etree.SubElement(probe, "parametereins").text = str(intent_message.text)
     etree.SubElement(probe, "parameterzwei").text = str(result_sentence)
     etree.SubElement(probe, "parameterdrei").text = str(result_sentence)
 	
