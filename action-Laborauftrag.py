@@ -18,12 +18,12 @@ def action_wrapper(hermes, intent_message):
     Refer to the documentation for further details. 
     """
 
-    base_path = os.path.dirname(os.path.realpath(__file__))
-	xml_file = os.path.join(base_path, "/testdaten.xml")
+    #base_path = os.path.dirname(os.path.realpath(__file__))
+	#xml_file = os.path.join(base_path, "/testdaten.xml")
 	
-	tree = etree.parse("testdaten.xml")
+	#tree = etree.parse("testdaten.xml")
 	
-	root = tree.getroot()
+	#root = tree.getroot()
 
 
     result_sentence = (str(intent_message.slots.Stoff.first().value)+" bekommt den Wert "+str(intent_message.slots.Zahlen_mit_Komma.first().value))
@@ -31,9 +31,9 @@ def action_wrapper(hermes, intent_message):
     unternehmen = etree.Element("unternehmen")
     probe = etree.SubElement(unternehmen, "probe")
 
-    etree.SubElement(probe, "parametereins").text = str(intent_message.slots.Stoff.first().value)
-    etree.SubElement(probe, "parameterzwei").text = str(intent_message.slots.Zahlen_mit_Komma.first().value)
-    etree.SubElement(probe, "parameterdrei").text = str(root)
+    etree.SubElement(probe, "parametereins").text = str(intent_message.slots.Dokument.first().value)
+    etree.SubElement(probe, "parameterzwei").text = str(intent_message.slots.Zahlenfolgen.first().value)
+    etree.SubElement(probe, "parameterdrei").text = str(result_sentence)
 	
     tree = etree.ElementTree(unternehmen)
     tree.write("testdaten.xml", encoding="UTF-8")
