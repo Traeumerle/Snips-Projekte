@@ -26,7 +26,7 @@ def action_wrapper(hermes, intent_message):
 	#root = tree.getroot()
 
 
-    result_sentence = (str(intent_message.slots.Stoff.first().value)+" bekommt den Wert "+str(intent_message.slots.Zahlen_mit_Komma.first().value))
+    result_sentence = (str(intent_message.slots.Dokument.first().value)+" bekommt den Wert "+str(intent_message.slots.Zahlenfolgen.first().value))
     
     unternehmen = etree.Element("unternehmen")
     probe = etree.SubElement(unternehmen, "probe")
