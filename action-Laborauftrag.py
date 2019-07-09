@@ -25,7 +25,7 @@ def action_wrapper(hermes, intent_message):
 
     result_sentence = ("Der "+str(intent_message.slots.Dokument.first().value)+" bekommt die Kennzeichnung "+str(intent_message.slots.Zahlenfolgen.first().value))
     
-    Laborauftrag = etree.Element(str(intent_message.slots.Dokument.first().value), name = str(intent_message.slots.Zahlenfolgen.first().value))
+    Laborauftrag = etree.Element("Laborauftrag", name = str(intent_message.slots.Zahlenfolgen.first().value))
     probe = etree.SubElement(Laborauftrag, "probe")
 
     tree = etree.ElementTree(Daten)
