@@ -17,16 +17,9 @@ def action_wrapper(hermes, intent_message):
       For end-user parameters use conf['secret']['parameterName'] 
     Refer to the documentation for further details. 
     """
-
-    #base_path = os.path.dirname(os.path.realpath(__file__))
-    #xml_file = os.path.join(base_path, "/testdaten.xml")
-    #tree = etree.parse("testdaten.xml")	
-    #root = tree.getroot()
-
     result_sentence = ("Der "+str(intent_message.slots.Dokument.first().value)+" bekommt die Kennzeichnung "+str(intent_message.slots.Zahlenfolgen.first().value))
     
     Laborauftrag = etree.Element(str(intent_message.slots.Dokument.first().value), name = str(intent_message.slots.Zahlenfolgen.first().value))
-    probe = etree.SubElement(Laborauftrag, "probe")
 
     tree = etree.ElementTree(Laborauftrag)
     tree.write("testdaten.xml", encoding="UTF-8")
