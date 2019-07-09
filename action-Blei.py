@@ -18,7 +18,7 @@ def action_wrapper(hermes, intent_message):
     Refer to the documentation for further details. 
     """
 
-    result_sentence = "Hallo"
+    result_sentence = (str(intent_message.slots.Stoff.first().value)+" bekommt den Wert "+str(intent_message.slots.Zahlen_mit_Komma.first().value))
     
     unternehmen = etree.Element("unternehmen")
     probe = etree.SubElement(unternehmen, "probe")
