@@ -25,7 +25,7 @@ def action_wrapper(hermes, intent_message):
 
     Kommazahlen = float(intent_message.slots.Zahlen_mit_Komma.first().value)
 	
-    result_sentence = (str(intent_message.slots.Stoff.first().value)+" bekommt den Wert {}".format(Kommazahlen))
+    result_sentence = (str(intent_message.slots.Stoff.first().value)+" bekommt den Wert "+str(intent_message.slots.Zahlen_mit_Komma.first().value))
 
     etree.SubElement(root, "parametereins").text = str(intent_message.slots.Stoff.first().value)
     etree.SubElement(root, "parameterzwei").text = "{}".format(Kommazahlen)
