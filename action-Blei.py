@@ -17,24 +17,38 @@ def action_wrapper(hermes, intent_message):
       For end-user parameters use conf['secret']['parameterName'] 
     Refer to the documentation for further details. 
     """
-
+    #Pfad der Datei wird in variable gespeichert
     base_path = os.path.dirname(os.path.realpath(__file__))
+    
+    #Datei wird dem Pfad hinzugefügt und in var gespeiechert
     xml_file = os.path.join(base_path, "/testdaten.xml")
+    
+    #Datei wird ge'parse'd und in var gespeichert
     tree = etree.parse("testdaten.xml")	
+    
+    #Hauptcontainer der Datei wird in var gespeichert 
     root = tree.getroot()
 
     Kommazahlen = float(intent_message.slots.Zahlen_mit_Komma.first().value)
-	
+    
+    #Antwortsatz und Sprachrückgabe wird erstellt
     result_sentence = (str(intent_message.slots.Stoff.first().value)+" bekommt den Wert "+str(intent_message.slots.Zahlen_mit_Komma.first().value))
-
+    
+    #Parameter werden dem Hauptcontainer hinzugefügt und mit einem Wert versehen
     etree.SubElement(root, "parametereins").text = str(intent_message.slots.Stoff.first().value)
     etree.SubElement(root, "parameterzwei").text = "{}".format(Kommazahlen)
     etree.SubElement(root, "parameterdrei").text = str(result_sentence)
-	
+    
+    #Hauptcontainer mit neuem Inhalt wird in Dateiformat geschrieben	
     tree = etree.ElementTree(root)
+    
+    #Datei wird gespeichert und codiert
     tree.write("testdaten.xml", encoding="UTF-8")
-	
+
+    #ID der Interaktion wird in var gespeichert
     current_session_id = intent_message.session_id
+
+    #Interaktion wird beendet und der Antwortsatz wird sprachlich Ausgegeben
     hermes.publish_end_session(current_session_id, result_sentence)
 	
 
