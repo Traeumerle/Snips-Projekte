@@ -28,18 +28,16 @@ def action_wrapper(hermes, intent_message):
     
     #Hauptcontainer der Datei wird in var gespeichert 
     root = tree.getroot()
-
-    Kommazahlen = float(intent_message.slots.Zahlen_mit_Komma.first().value)
     
     #Antwortsatz und Sprachrückgabe wird erstellt
     result_sentence = (str(intent_message.slots.Stoff.first().value)+" bekommt den Wert "+str(intent_message.slots.Zahlen_mit_Komma.first().value))
     
     #Parameter werden dem Hauptcontainer hinzugefügt und mit einem Wert versehen
     etree.SubElement(root, "parametereins").text = str(intent_message.slots.Stoff.first().value)
-    etree.SubElement(root, "parameterzwei").text = "{}".format(Kommazahlen)
+    etree.SubElement(root, "parameterzwei").text = str(intent_message.slots.Zahlen_mit_Komma.first().value)
     etree.SubElement(root, "parameterdrei").text = str(result_sentence)
     
-    #Hauptcontainer mit neuem Inhalt wird in Dateiformat geschrieben	
+    #Hauptcontainer mit neuem Inhalt wird in Dateiformat der XML geschrieben	
     tree = etree.ElementTree(root)
     
     #Datei wird gespeichert und codiert
