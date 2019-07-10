@@ -18,16 +18,13 @@ def action_wrapper(hermes, intent_message):
     Refer to the documentation for further details. 
     """
 
-    
-    zahlen = int(intent_messsage.slots.Zahlenfolgen.first().value)
-
     #Antwortsatz für Sprachrückgabe wird erstellt	
     result_sentence = ("Der "+str(intent_message.slots.Dokument.first().value)+" bekommt die Kennzeichnung "+str(intent_message.slots.Zahlenfolgen.first().value))
     
     #neuer Container wird erstellt und mit einem Wert versehen
-    Laborauftrag = etree.Element(str(intent_message.slots.Dokument.first().value), name = "{}".format(zahlen))
+    Laborauftrag = etree.Element(str(intent_message.slots.Dokument.first().value), name = str(intent_message.slots.Zahlenfolgen.first().value))
     
-    #Hauptcontainer mit neuem Inhalt wird in Dateiformat geschrieben
+    #Hauptcontainer mit neuem Inhalt wird in Dateiformat der XML geschrieben
     tree = etree.ElementTree(Laborauftrag)
 
     #Datei wird gespeichert und codiert
