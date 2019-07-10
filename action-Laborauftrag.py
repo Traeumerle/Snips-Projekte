@@ -17,16 +17,26 @@ def action_wrapper(hermes, intent_message):
       For end-user parameters use conf['secret']['parameterName'] 
     Refer to the documentation for further details. 
     """
+
+    
     zahlen = int(intent_messsage.slots.Zahlenfolgen.first().value)
-	
+
+    #Antwortsatz für Sprachrückgabe wird erstellt	
     result_sentence = ("Der "+str(intent_message.slots.Dokument.first().value)+" bekommt die Kennzeichnung "+str(intent_message.slots.Zahlenfolgen.first().value))
     
+    #neuer Container wird erstellt und mit einem Wert versehen
     Laborauftrag = etree.Element(str(intent_message.slots.Dokument.first().value), name = "{}".format(zahlen))
-
+    
+    #Hauptcontainer mit neuem Inhalt wird in Dateiformat geschrieben
     tree = etree.ElementTree(Laborauftrag)
+
+    #Datei wird gespeichert und codiert
     tree.write("testdaten.xml", encoding="UTF-8")
 	
+    #ID der Interaktion wird in var gespeichert
     current_session_id = intent_message.session_id
+	
+    #Interaktion wird beendet und der Antwortsatz wird sprachlich Ausgegeben
     hermes.publish_end_session(current_session_id, result_sentence)
 	
 
