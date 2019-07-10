@@ -23,7 +23,7 @@ def action_wrapper(hermes, intent_message):
     tree = etree.parse("testdaten.xml")	
     root = tree.getroot()
 
-    Kommazahlen = int(intent_message.slots.Zahlen_mit_Komma.first().value)
+    Kommazahlen = float(intent_message.slots.Zahlen_mit_Komma.first().value)
 	
     result_sentence = (str(intent_message.slots.Stoff.first().value)+" bekommt den Wert {}".format(Kommazahlen))
 
