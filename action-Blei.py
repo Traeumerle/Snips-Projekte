@@ -23,10 +23,12 @@ def action_wrapper(hermes, intent_message):
     tree = etree.parse("testdaten.xml")	
     root = tree.getroot()
 
-    result_sentence = (str(intent_message.slots.Stoff.first().value)+" bekommt den Wert "+str(intent_message.slots.Zahlen_mit_Komma.first().value))
+    Kommazahlen = int(intent_message.slots.Zahlen_mit_Komma.first().value)
+	
+    result_sentence = (str(intent_message.slots.Stoff.first().value)+" bekommt den Wert {}".format(Kommazahlen))
 
     etree.SubElement(root, "parametereins").text = str(intent_message.slots.Stoff.first().value)
-    etree.SubElement(root, "parameterzwei").text = str(intent_message.slots.Zahlen_mit_Komma.first().value)
+    etree.SubElement(root, "parameterzwei").text = "{}".format(Kommazahlen)
     etree.SubElement(root, "parameterdrei").text = str(result_sentence)
 	
     tree = etree.ElementTree(root)
