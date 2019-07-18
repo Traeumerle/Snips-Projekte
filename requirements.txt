@@ -1,5 +1,5 @@
 hermes-python>=0.1
 lxml
 snipskit[mqtt]==0.5.3
-Requests>=2.22.0
+requests>=2.22.0
 
