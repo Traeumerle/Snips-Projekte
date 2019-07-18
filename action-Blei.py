@@ -6,6 +6,7 @@ from lxml import etree
 from hermes_python.hermes import Hermes
 from hermes_python.ontology import *
 import os
+import requests
 
 def action_wrapper(hermes, intent_message):
     """ Write the body of the function that will be executed once the intent is recognized. 
@@ -17,31 +18,30 @@ def action_wrapper(hermes, intent_message):
       For end-user parameters use conf['secret']['parameterName'] 
     Refer to the documentation for further details. 
     """
-    #Pfad der Datei wird in variable gespeichert
-    base_path = os.path.dirname(os.path.realpath(__file__))
+    ###-----------------Get Request an den Server senden und response in variable abspeichern-----------------###
     
-    #Datei wird dem Pfad hinzugefügt und in var gespeiechert
-    xml_file = os.path.join(base_path, "/testdaten.xml")
+    #Antwortsatz und Sprachrückgabe wird erstellt
+    result_sentence = (str(intent_message.slots.Stoff.first().value)+" bekommt den Wert "+str(intent_message.slots.Zahlen_mit_Komma.first().value))
+ 
+    #URL für GET Request festlegen
+    url = "http://192.168.200.71:8080/WebAppTest/Basic"
+    
+    #per GET bekommene XML Datei in var speichern
+    response = requests.get(url)
     
     #Datei wird ge'parse'd und in var gespeichert
-    tree = etree.parse("testdaten.xml")	
+    tree = etree.fromstring(response)
     
     #Hauptcontainer der Datei wird in var gespeichert 
     root = tree.getroot()
     
-    #Antwortsatz und Sprachrückgabe wird erstellt
-    result_sentence = (str(intent_message.slots.Stoff.first().value)+" bekommt den Wert "+str(intent_message.slots.Zahlen_mit_Komma.first().value))
-    
+    werteXml = {'laborauftragsId':'root.get("Name")', 'probenName': str(intent_message.slots.Stoff.first().value, 'probenId': 187, 'probenWert': str(intent_message.slots.Zahlen_mit_Komma.first().value)}
     #Parameter werden dem Hauptcontainer hinzugefügt und mit einem Wert versehen
-    etree.SubElement(root, "parametereins").text = str(intent_message.slots.Stoff.first().value)
-    etree.SubElement(root, "parameterzwei").text = str(intent_message.slots.Zahlen_mit_Komma.first().value)
-    etree.SubElement(root, "parameterdrei").text = str(result_sentence)
+    #etree.SubElement(root, "ProbenId").text = "187"
+    #etree.SubElement(root, "ProbenName").text = str(intent_message.slots.Stoff.first().value)
+    #etree.SubElement(root, "ProbenWert").text = str(intent_message.slots.Zahlen_mit_Komma.first().value)
     
-    #Hauptcontainer mit neuem Inhalt wird in Dateiformat der XML geschrieben	
-    tree = etree.ElementTree(root)
-    
-    #Datei wird gespeichert und codiert
-    tree.write("testdaten.xml", encoding="UTF-8")
+    requestResponse = requests.post(url, data=werteXml)
 
     #ID der Interaktion wird in var gespeichert
     current_session_id = intent_message.session_id

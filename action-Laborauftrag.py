@@ -6,6 +6,7 @@ from lxml import etree
 from hermes_python.hermes import Hermes
 from hermes_python.ontology import *
 import os
+import requests
 
 def action_wrapper(hermes, intent_message):
     """ Write the body of the function that will be executed once the intent is recognized. 
@@ -22,13 +23,19 @@ def action_wrapper(hermes, intent_message):
     result_sentence = ("Der "+str(intent_message.slots.Dokument.first().value)+" bekommt die Kennzeichnung "+str(intent_message.slots.Zahlenfolgen.first().value))
     
     #neuer Container wird erstellt und mit einem Wert versehen
-    Laborauftrag = etree.Element(str(intent_message.slots.Dokument.first().value), name = str(intent_message.slots.Zahlenfolgen.first().value))
+    #Laborauftrag = etree.Element(str(intent_message.slots.Dokument.first().value), name = str(intent_message.slots.Zahlenfolgen.first().value))
     
     #Hauptcontainer mit neuem Inhalt wird in Dateiformat der XML geschrieben
-    tree = etree.ElementTree(Laborauftrag)
+    #tree = etree.ElementTree(Laborauftrag)
 
     #Datei wird gespeichert und codiert
-    tree.write("testdaten.xml", encoding="UTF-8")
+    #tree.write("testdaten.xml", encoding="UTF-8")
+
+    url = 'http://192.168.200.71:8080/WebAppTest/Basic'
+    
+    xmlData = {'laborauftragsId': str(intent_message.slots.Zahlenfolgen.first().value) }
+    
+    requests.post(url, data=xmlData)
 	
     #ID der Interaktion wird in var gespeichert
     current_session_id = intent_message.session_id
