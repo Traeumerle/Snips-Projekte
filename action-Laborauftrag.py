@@ -35,7 +35,7 @@ def action_wrapper(hermes, intent_message):
     
     xmlData = {'laborauftragsId': str(intent_message.slots.Zahlenfolgen.first().value), 'probenName': 'NA', 'probenWert':'NA', 'probenId':'187'}
     
-    requests.post(url, data=xmlData)
+    r = requests.post(url, data=xmlData)
 	
     #ID der Interaktion wird in var gespeichert
     current_session_id = intent_message.session_id
