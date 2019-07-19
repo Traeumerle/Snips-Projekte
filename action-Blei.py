@@ -34,7 +34,7 @@ def action_wrapper(hermes, intent_message):
     tree = etree.parse(StringIO(response.text))
     
     #Hauptcontainer der Datei wird in var gespeichert 
-    #root = tree.getroot()
+    root = tree.getroot()
     
     #werteXml = {'laborauftragsId':root.get("Name"), 'probenName': str(intent_message.slots.Stoff.first().value, 'probenId': 187, 'probenWert': str(intent_message.slots.Zahlen_mit_Komma.first().value)}
     
