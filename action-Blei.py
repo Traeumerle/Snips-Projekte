@@ -31,7 +31,7 @@ def action_wrapper(hermes, intent_message):
     response = requests.get(url)
     
     #Datei wird ge'parse'd und in var gespeichert
-    #tree = etree.parse(StringIO(response.text))
+    tree = etree.parse(StringIO(response.text))
     
     #Hauptcontainer der Datei wird in var gespeichert 
     #root = tree.getroot()
