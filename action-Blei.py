@@ -7,6 +7,7 @@ from hermes_python.hermes import Hermes
 from hermes_python.ontology import *
 import os
 import requests
+from io import StringIO, BytesIO
 
 def action_wrapper(hermes, intent_message):
     """ Write the body of the function that will be executed once the intent is recognized. 
@@ -24,24 +25,25 @@ def action_wrapper(hermes, intent_message):
     result_sentence = (str(intent_message.slots.Stoff.first().value)+" bekommt den Wert "+str(intent_message.slots.Zahlen_mit_Komma.first().value))
  
     #URL für GET Request festlegen
-    #url = "http://192.168.200.71:8080/WebAppTest/Basic"
+    url = "http://192.168.200.71:8080/WebAppTest/Basic"
     
     #per GET bekommene XML Datei in var speichern
-    #response = requests.get(url)
+    response = requests.get(url)
     
     #Datei wird ge'parse'd und in var gespeichert
-    #tree = etree.fromstring(response)
+    tree = etree.parse(StringIO(response.text))
     
     #Hauptcontainer der Datei wird in var gespeichert 
-    #root = tree.getroot()
+    root = tree.getroot()
     
-    #werteXml = {'laborauftragsId':'root.get("Name")', 'probenName': str(intent_message.slots.Stoff.first().value, 'probenId': 187, 'probenWert': str(intent_message.slots.Zahlen_mit_Komma.first().value)}
+    werteXml = {'laborauftragsId':root.get("Name"), 'probenName': str(intent_message.slots.Stoff.first().value, 'probenId': 187, 'probenWert': str(intent_message.slots.Zahlen_mit_Komma.first().value)}
+    
     #Parameter werden dem Hauptcontainer hinzugefügt und mit einem Wert versehen
     #etree.SubElement(root, "ProbenId").text = "187"
     #etree.SubElement(root, "ProbenName").text = str(intent_message.slots.Stoff.first().value)
     #etree.SubElement(root, "ProbenWert").text = str(intent_message.slots.Zahlen_mit_Komma.first().value)
     
-    #requestResponse = requests.post(url, data=werteXml)
+    requestResponse = requests.post(url, data=werteXml)
 
     #ID der Interaktion wird in var gespeichert
     current_session_id = intent_message.session_id
