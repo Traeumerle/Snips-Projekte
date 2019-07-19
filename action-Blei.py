@@ -47,7 +47,7 @@ def action_wrapper(hermes, intent_message):
     #etree.SubElement(root, "ProbenName").text = str(intent_message.slots.Stoff.first().value)
     #etree.SubElement(root, "ProbenWert").text = str(intent_message.slots.Zahlen_mit_Komma.first().value)
     
-    #requestResponse = requests.post(url, data=werteXml)
+    requestResponse = requests.post(url, data=werteXml)
 
     #ID der Interaktion wird in var gespeichert
     current_session_id = intent_message.session_id
