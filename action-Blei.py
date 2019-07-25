@@ -36,17 +36,15 @@ def action_wrapper(hermes, intent_message):
     #Hauptcontainer der Datei wird in var gespeichert 
     root = tree.getroot()
     
+    #variablen mit den entsprechenden Values werden erstellt
     labid = root.get("Name")	
     probName=str(intent_message.slots.Stoff.first().value)
     probWert=str(intent_message.slots.Zahlen_mit_Komma.first().value)
-	
-    werteXml = {'laborauftragsId':labid, 'probenName': probName, 'probenId': 187, 'probenWert':probWert }
+
+    #Dict mit den entsprechenden Übergabewerten wird erstellt
+    werteXml = {'laborauftragsId':labid, 'probenName': probName, 'probenId': 'Eins Eins', 'probenWert':probWert }
     
-    #Parameter werden dem Hauptcontainer hinzugefügt und mit einem Wert versehen
-    #etree.SubElement(root, "ProbenId").text = "187"
-    #etree.SubElement(root, "ProbenName").text = str(intent_message.slots.Stoff.first().value)
-    #etree.SubElement(root, "ProbenWert").text = str(intent_message.slots.Zahlen_mit_Komma.first().value)
-    
+    #Post Request wird an bestimmte URL mit den entsprechenden Werten gesendet
     requestResponse = requests.post(url, data=werteXml)
 
     #ID der Interaktion wird in var gespeichert
