@@ -33,7 +33,7 @@ def action_wrapper(hermes, intent_message):
 
     url = 'http://192.168.200.71:8080/WebAppTest/Basic'
     
-    xmlData = {'laborauftragsId': str(intent_message.slots.Zahlenfolgen.first().value), 'probenName': 'NA', 'probenWert':'NA', 'probenId':'187'}
+    xmlData = {'laborauftragsId': str(intent_message.slots.Zahlenfolgen.first().value), 'probenName': 'NA', 'probenWert':'NA', 'probenId':'Eins Eins'}
     
     r = requests.post(url, data=xmlData)
 	
