@@ -25,7 +25,7 @@ def action_wrapper(hermes, intent_message):
     result_sentence = (str(intent_message.slots.Stoff.first().value)+" bekommt den Wert "+str(intent_message.slots.Zahlen_mit_Komma.first().value))
  
     #URL für GET Request festlegen
-    url = 'http://192.168.200.71:8080/WebAppTest/Basic'
+    url = 'http://192.168.200.71:8080/WebAppTest/Basic?probenId=Eins Eins&probenName=Blei&probenWert=sechs&laborauftragsId=Eins Zwei Drei Vier Fünf Sechs Sieben Acht Neun'
     
     #per GET bekommene XML Datei in var speichern
     ##response = requests.get(url)
@@ -45,7 +45,7 @@ def action_wrapper(hermes, intent_message):
     xmlData = {'laborauftragsId': 'eins zwei drei vier fünf sechs sieben acht neun', 'probenName': 'Blei', 'probenWert':'NA', 'probenId':'Eins Eins'}
     
     #Post Request wird an bestimmte URL mit den entsprechenden Werten gesendet
-    postRequestResponse = requests.post(url, data=xmlData)
+    postRequestResponse = requests.post(url)
 
     #ID der Interaktion wird in var gespeichert
     current_session_id = intent_message.session_id
