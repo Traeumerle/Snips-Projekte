@@ -28,7 +28,7 @@ def action_wrapper(hermes, intent_message):
     url = 'http://192.168.200.71:8080/WebAppTest/Basic'
     
     #per GET bekommene XML Datei in var speichern
-    response = requests.get(url)
+    ##response = requests.get(url)
     
     #Datei wird ge'parse'd und in var gespeichert
     ##tree = etree.parse(StringIO(response.text))
