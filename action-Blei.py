@@ -31,13 +31,13 @@ def action_wrapper(hermes, intent_message):
     response = requests.get(url)
     
     #Datei wird ge'parse'd und in var gespeichert
-    tree = etree.parse(StringIO(response.text))
+    ##tree = etree.parse(StringIO(response.text))
     
     #Hauptcontainer der Datei wird in var gespeichert 
-    root = tree.getroot()
+    ##root = tree.getroot()
     
     #variablen mit den entsprechenden Values werden erstellt
-    labid = root.get("Name")	
+    labid = "eins zwei drei vier fünf sechs sieben acht neun"##root.get("Name")	
     probName=str(intent_message.slots.Stoff.first().value)
     probWert=str(intent_message.slots.Zahlen_mit_Komma.first().value)
 
