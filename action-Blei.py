@@ -25,27 +25,27 @@ def action_wrapper(hermes, intent_message):
     result_sentence = (str(intent_message.slots.Stoff.first().value)+" bekommt den Wert "+str(intent_message.slots.Zahlen_mit_Komma.first().value))
  
     #URL für GET Request festlegen
-    url = 'http://192.168.200.71:8080/WebAppTest/Basic?probenId=Eins Eins&probenName=Blei&probenWert=sechs&laborauftragsId=Eins Zwei Drei Vier Fünf Sechs Sieben Acht Neun'
+    url = 'http://192.168.200.71:8080/WebAppTest/Basic'
     
     #per GET bekommene XML Datei in var speichern
-    ##response = requests.get(url)
+    response = requests.get(url)
     
     #Datei wird ge'parse'd und in var gespeichert
-    ##tree = etree.parse(StringIO(response.text))
+    tree = etree.parse(StringIO(response.text))
     
     #Hauptcontainer der Datei wird in var gespeichert 
-    ##root = tree.getroot()
+    root = tree.getroot()
     
     #variablen mit den entsprechenden Values werden erstellt
-    #labid = "eins zwei drei vier fünf sechs sieben acht neun"##root.get("Name")	
-    #probName=str(intent_message.slots.Stoff.first().value)
-    #probWert=str(intent_message.slots.Zahlen_mit_Komma.first().value)
+    labid = "eins zwei drei vier fünf sechs sieben acht neun"##root.get("Name")	
+    probName=str(intent_message.slots.Stoff.first().value)
+    probWert=str(intent_message.slots.Zahlen_mit_Komma.first().value)
 
     #Dict mit den entsprechenden Übergabewerten wird erstellt
-    xmlData = {'laborauftragsId': 'eins zwei drei vier fünf sechs sieben acht neun', 'probenName': 'Blei', 'probenWert':'NA', 'probenId':'Eins Eins'}
+    xmlData = {'laborauftragsId': labid, 'probenName': probName, 'probenWert':probWert, 'probenId':'Eins Eins'}
     
     #Post Request wird an bestimmte URL mit den entsprechenden Werten gesendet
-    postRequestResponse = requests.post(url)
+    postRequestResponse = requests.post(url, params=xmlData)
 
     #ID der Interaktion wird in var gespeichert
     current_session_id = intent_message.session_id
