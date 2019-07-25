@@ -41,18 +41,11 @@ def action_wrapper(hermes, intent_message):
     #probName=str(intent_message.slots.Stoff.first().value)
     #probWert=str(intent_message.slots.Zahlen_mit_Komma.first().value)
 
-    
-    xmlData = {'laborauftragsId': 'eins zwei drei vier fünf sechs sieben acht neun', 'probenName': 'NA', 'probenWert':'NA', 'probenId':'Eins Eins'}
-    
-    r = requests.post(url, data=xmlData)
-
-
-
     #Dict mit den entsprechenden Übergabewerten wird erstellt
-    ##werteXml = {'laborauftragsId': 'eins zwei drei vier fünf sechs sieben acht neun', 'probenName': 'Blei', 'probenId': 'Eins Eins', 'probenWert':'einundzwanzig' }
+    xmlData = {'laborauftragsId': 'eins zwei drei vier fünf sechs sieben acht neun', 'probenName': 'Blei', 'probenWert':'NA', 'probenId':'Eins Eins'}
     
     #Post Request wird an bestimmte URL mit den entsprechenden Werten gesendet
-    ##postRequestResponse = requests.post(url, data=werteXml)
+    postRequestResponse = requests.post(url, data=xmlData)
 
     #ID der Interaktion wird in var gespeichert
     current_session_id = intent_message.session_id
