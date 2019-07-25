@@ -25,7 +25,7 @@ def action_wrapper(hermes, intent_message):
     result_sentence = (str(intent_message.slots.Stoff.first().value)+" bekommt den Wert "+str(intent_message.slots.Zahlen_mit_Komma.first().value))
  
     #URL für GET Request festlegen
-    url = 'http://192.168.200.67:8080/WebAppTest/Basic'
+    url = 'http://192.168.200.67:8080/WebAppTest'
     
     #per GET bekommene XML Datei in var speichern
     ##response = requests.get(url)
