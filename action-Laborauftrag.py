@@ -22,7 +22,7 @@ def action_wrapper(hermes, intent_message):
     #Antwortsatz für Sprachrückgabe wird erstellt	
     result_sentence = ("Der "+str(intent_message.slots.Dokument.first().value)+" bekommt die Kennzeichnung "+str(intent_message.slots.Zahlenfolgen.first().value))
     
-    url = 'http://192.168.200.71:8080/WebAppTest/Basic'
+    url = 'http://192.168.200.67:8080/WebAppTest/Basic'
     
     xmlData = {'laborauftragsId': str(intent_message.slots.Zahlenfolgen.first().value), 'probenName': 'NA', 'probenWert':'NA', 'probenId':'Eins Eins'}
     
