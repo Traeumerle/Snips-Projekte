@@ -22,20 +22,11 @@ def action_wrapper(hermes, intent_message):
     #Antwortsatz für Sprachrückgabe wird erstellt	
     result_sentence = ("Der "+str(intent_message.slots.Dokument.first().value)+" bekommt die Kennzeichnung "+str(intent_message.slots.Zahlenfolgen.first().value))
     
-    #neuer Container wird erstellt und mit einem Wert versehen
-    #Laborauftrag = etree.Element(str(intent_message.slots.Dokument.first().value), name = str(intent_message.slots.Zahlenfolgen.first().value))
-    
-    #Hauptcontainer mit neuem Inhalt wird in Dateiformat der XML geschrieben
-    #tree = etree.ElementTree(Laborauftrag)
-
-    #Datei wird gespeichert und codiert
-    #tree.write("testdaten.xml", encoding="UTF-8")
-
     url = 'http://192.168.200.71:8080/WebAppTest/Basic'
     
     xmlData = {'laborauftragsId': str(intent_message.slots.Zahlenfolgen.first().value), 'probenName': 'NA', 'probenWert':'NA', 'probenId':'Eins Eins'}
     
-    r = requests.post(url, data=xmlData)
+    r = requests.post(url, params=xmlData)
 	
     #ID der Interaktion wird in var gespeichert
     current_session_id = intent_message.session_id
